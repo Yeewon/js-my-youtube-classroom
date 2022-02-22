@@ -1,19 +1,22 @@
-import {$} from '../utils/DOM.js';
-import {formatDate} from '../utils/date.js';
-import {videoInfos} from '../states/videoInfo.js';
-import {saveButtonTemplate, saveCancelButtonTemplate} from './button.js';
+import { $ } from "../utils/DOM.js";
+import { formatDate } from "../utils/date.js";
+import { videoInfos } from "../states/videoInfos.js";
+import { saveButtonTemplate, saveCancelButtonTemplate } from "./button.js";
 
 export const createSearchedVideoList = (videos) => {
-    videos.map((video) => {
-        $('#video-search-result').insertAdjacentHTML('beforeend', searchedVideoListTemplate(video));
-    });
+  videos.map((video) => {
+    $("#video-search-result").insertAdjacentHTML(
+      "beforeend",
+      searchedVideoListTemplate(video)
+    );
+  });
 };
 
-export const searchedVideoListTemplate = ({id, snippet}) => {
-    const date = formatDate(snippet.publishTime);
-    const buttonTemplate = saveButtonConroller(id.videoId);
+export const searchedVideoListTemplate = ({ id, snippet }) => {
+  const date = formatDate(snippet.publishTime);
+  const buttonTemplate = saveButtonConroller(id.videoId);
 
-    return `<article class="clip js-video relative" data-video-id="${id.videoId}" data-title="${snippet.title}" data-channel-id="${snippet.channelId}" data-channel-title="${snippet.channelTitle}" data-publish-time="${snippet.publishTime}">
+  return `<article class="clip js-video relative" data-video-id="${id.videoId}" data-title="${snippet.title}" data-channel-id="${snippet.channelId}" data-channel-title="${snippet.channelTitle}" data-publish-time="${snippet.publishTime}">
                 <div class="preview-container">
                    <iframe class="js-preview" width="100%" height="118" src="https://www.youtube.com/embed/${id.videoId}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
                 </div>
@@ -35,17 +38,17 @@ export const searchedVideoListTemplate = ({id, snippet}) => {
 };
 
 const saveButtonConroller = (targetId) => {
-    const savedVideoList = videoInfos.get();
-    let buttonTemplate = '';
+  const savedVideoList = videoInfos.get();
+  let buttonTemplate = "";
 
-    savedVideoList.map((videoInfo) => {
-        if (videoInfo.id.videoId === targetId) {
-            buttonTemplate = saveCancelButtonTemplate();
-            return;
-        }
-    });
+  savedVideoList.map((videoInfo) => {
+    if (videoInfo.id.videoId === targetId) {
+      buttonTemplate = saveCancelButtonTemplate();
+      return;
+    }
+  });
 
-    if (buttonTemplate === '') buttonTemplate = saveButtonTemplate();
+  if (buttonTemplate === "") buttonTemplate = saveButtonTemplate();
 
-    return buttonTemplate;
+  return buttonTemplate;
 };
