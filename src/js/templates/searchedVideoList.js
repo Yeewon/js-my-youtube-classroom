@@ -1,6 +1,6 @@
 import { $ } from "../utils/DOM.js";
 import { formatDate } from "../utils/date.js";
-import { videoInfos } from "../states/videoInfos.js";
+import { videoInfoList } from "../states/videoInfoList.js";
 import { saveButtonTemplate, saveCancelButtonTemplate } from "./button.js";
 
 export const createSearchedVideoList = (videos) => {
@@ -38,7 +38,7 @@ export const searchedVideoListTemplate = ({ id, snippet }) => {
 };
 
 const saveButtonConroller = (targetId) => {
-  const savedVideoList = videoInfos.get();
+  const savedVideoList = videoInfoList.get();
   let buttonTemplate = "";
 
   savedVideoList.map((videoInfo) => {

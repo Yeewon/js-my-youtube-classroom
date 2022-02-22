@@ -1,10 +1,10 @@
 import { $ } from "../utils/DOM.js";
 import { SAVED_VIDEO_LIST } from "../constants/localStorage.js";
 import { setLocalStorage } from "../utils/localStorage.js";
-import { videoInfos } from "../states/videoInfos.js";
 import { MAX_SAVEABLE_VIDEO_COUNT } from "../constants/classroom.js";
 import { renderSaveButton, renderSaveCancelButton } from "../utils/render.js";
 import { loadVideo } from "./filterVideo.js";
+import { videoInfoList } from "../states/videoInfoList.js";
 import { filter } from "../states/filter.js";
 import { onSnackbar } from "./snackbarControl.js";
 import {
@@ -14,7 +14,7 @@ import {
 
 export const saveVideoController = ({ target }) => {
   if (target.classList.contains("save-button")) {
-    if (videoInfos.size >= MAX_SAVEABLE_VIDEO_COUNT) return;
+    if (videoInfoList.size >= MAX_SAVEABLE_VIDEO_COUNT) return;
 
     saveVideo(target.closest(".js-video"));
     renderSaveCancelButton(target.closest(".button-list"));
@@ -30,12 +30,12 @@ export const saveVideoController = ({ target }) => {
 
 const saveVideo = ($video) => {
   const videoInfo = createVideoInfo($video.dataset);
-  videoInfos.add(videoInfo);
+  videoInfoList.add(videoInfo);
 };
 
 const saveCancelVideo = ($video) => {
   const { videoId } = $video.dataset;
-  videoInfos.remove(videoId);
+  videoInfoList.remove(videoId);
 };
 
 const createVideoInfo = (videoDataset) => {

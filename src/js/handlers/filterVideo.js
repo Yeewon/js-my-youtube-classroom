@@ -1,6 +1,6 @@
 import { $, $$ } from "../utils/DOM.js";
-import { videoInfos } from "../states/videoInfos.js";
 import { renderEmptyVideo, renderSavedVideo } from "../utils/render.js";
+import { videoInfoList } from "../states/videoInfoList.js";
 import { filter } from "../states/filter.js";
 
 export const filterVideoController = ({ target }) => {
@@ -18,7 +18,7 @@ const buttonController = (option) => {
 };
 
 export const loadVideo = (option = "toWatch") => {
-  const filteredVideo = filterVideo(videoInfos.get(), option);
+  const filteredVideo = filterVideo(videoInfoList.get(), option);
   if (!filteredVideo.length) renderEmptyVideo();
   else renderSavedVideo(filteredVideo);
 };

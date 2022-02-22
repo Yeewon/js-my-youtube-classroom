@@ -7,7 +7,7 @@ import {
   WATCHED_SUCCESS_MSG,
 } from "../constants/snackbar.js";
 import { filter } from "../states/filter.js";
-import { videoInfos } from "../states/videoInfos.js";
+import { videoInfoList } from "../states/videoInfoList.js";
 import { loadVideo } from "./filterVideo.js";
 import { onSnackbar } from "./snackbarControl.js";
 
@@ -26,7 +26,7 @@ const changeStatus = (target, option) => {
     liked: () => handleLikedButton(target),
     delete: () => {
       if (confirm(DELETE_CONFIRM_NSG)) {
-        videoInfos.remove(videoId);
+        videoInfoList.remove(videoId);
         onSnackbar(DELETE_SUCCESS_MSG);
       }
     },
@@ -70,10 +70,10 @@ const changeButton = (target, removeTarget, addTarget) => {
 
 const setVideoStatus = (target, $type, value) => {
   const targetId = target.closest("article").dataset.videoId;
-  const videos = videoInfos.get();
+  const videos = videoInfoList.get();
 
   videos.map((video) => {
     if (video.id.videoId === targetId) return (video.type[$type] = value);
   });
-  videoInfos.set(videos);
+  videoInfoList.set(videos);
 };
