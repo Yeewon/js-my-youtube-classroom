@@ -2,19 +2,22 @@ import { $, $$ } from "../utils/DOM.js";
 import { renderEmptyVideo, renderSavedVideo } from "../utils/render.js";
 import { videoInfoList } from "../states/videoInfoList.js";
 import { filter } from "../states/filter.js";
+import { PRIMARY_COLOR } from "../constants/classroom.js";
 
 export const filterVideoController = ({ target }) => {
-  if (!["toWatch", "watched", "liked"].includes(target.id)) return;
   const option = target.id;
-  filter.set(option);
-  buttonController(option);
-  loadVideo(option);
+
+  if (filter.contains(option)) {
+    filter.set(option);
+    filterButtonController(option);
+    loadVideo(option);
+  }
 };
 
-const buttonController = (option) => {
+const filterButtonController = (option = "toWatch") => {
   const buttons = $$("#video-filter button");
-  buttons.forEach((button) => button.classList.remove("bg-cyan-100"));
-  $(`#${option}`).classList.add("bg-cyan-100");
+  buttons.forEach((button) => button.classList.remove(PRIMARY_COLOR));
+  $(`#${option}`).classList.add(PRIMARY_COLOR);
 };
 
 export const loadVideo = (option = "toWatch") => {
