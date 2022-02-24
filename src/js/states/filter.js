@@ -1,11 +1,16 @@
 export const filter = {
-    value: 'toWatch',
+  value: "toWatch",
 
-    get() {
-        return this.value;
-    },
+  get() {
+    return this.value;
+  },
 
-    set(newFilter = '') {
-        this.value = newFilter;
-    },
+  set(newFilter = "") {
+    this.value = newFilter;
+  },
+
+  contains(option) {
+    const filters = ["toWatch", "watched", "liked"];
+    return filters.includes(option);
+  },
 };
