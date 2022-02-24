@@ -30,8 +30,7 @@ const setPrimaryColor = (option = "toWatch") => {
 
 export const loadVideo = (option = "toWatch") => {
   const filteredVideo = filterVideo(option);
-  if (!filteredVideo.length) renderEmptyVideo();
-  else renderSavedVideo(filteredVideo);
+  filteredVideo.length ? renderSavedVideo(filteredVideo) : renderEmptyVideo();
 };
 
 const filterVideo = (option) => {
