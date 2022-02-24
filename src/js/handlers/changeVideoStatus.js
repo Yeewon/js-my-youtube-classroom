@@ -37,44 +37,20 @@ const changeStatus = (target) => {
 };
 
 const handleWatchedButton = (target) => {
-  if (target.classList.contains("opacity-hover")) {
-    changeButton(target, "opacity-hover", "false");
-    setVideoStatus(target, "isWatched", true);
-
-    onSnackbar(WATCHED_SUCCESS_MSG);
-  } else {
-    changeButton(target, "false", "opacity-hover");
-    setVideoStatus(target, "isWatched", false);
-
-    onSnackbar(TO_WATCH_SUCCESS_MSG);
-  }
+  const targetId = target.closest("article").dataset.videoId;
+  target.classList.toggle("opacity-hover");
+  videoInfoList.setStatus("isWatched", targetId);
+  onSnackbar(isSelected(target) ? WATCHED_SUCCESS_MSG : TO_WATCH_SUCCESS_MSG);
 };
 
 const handleLikedButton = (target) => {
-  if (target.classList.contains("opacity-hover")) {
-    changeButton(target, "opacity-hover", "false");
-    setVideoStatus(target, "isLiked", true);
-
-    onSnackbar(LIKED_SUCCESS_MSG);
-  } else {
-    changeButton(target, "false", "opacity-hover");
-    setVideoStatus(target, "isLiked", false);
-
-    onSnackbar(LIKE_CANCEL_SUCCESS_MSG);
-  }
-};
-
-const changeButton = (target, removeTarget, addTarget) => {
-  target.classList.remove(removeTarget);
-  target.classList.add(addTarget);
-};
-
-const setVideoStatus = (target, $type, value) => {
   const targetId = target.closest("article").dataset.videoId;
-  const videos = videoInfoList.get();
+  target.classList.toggle("opacity-hover");
+  videoInfoList.setStatus("isLiked", targetId);
 
-  videos.map((video) => {
-    if (video.id.videoId === targetId) return (video.type[$type] = value);
-  });
-  videoInfoList.set(videos);
+  onSnackbar(isSelected(target) ? LIKED_SUCCESS_MSG : LIKE_CANCEL_SUCCESS_MSG);
+};
+
+const isSelected = (target) => {
+  return !target.classList.contains("opacity-hover");
 };
