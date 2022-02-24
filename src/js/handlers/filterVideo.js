@@ -9,14 +9,22 @@ export const filterVideoController = ({ target }) => {
 
   if (filter.contains(option)) {
     filter.set(option);
-    filterButtonController(option);
+    setButtonColor(option);
     loadVideo(option);
   }
 };
 
-const filterButtonController = (option = "toWatch") => {
+const setButtonColor = (option = "toWatch") => {
+  InitializeButtonColor();
+  setPrimaryColor(option);
+};
+
+const InitializeButtonColor = () => {
   const buttons = $$("#video-filter button");
   buttons.forEach((button) => button.classList.remove(PRIMARY_COLOR));
+};
+
+const setPrimaryColor = (option = "toWatch") => {
   $(`#${option}`).classList.add(PRIMARY_COLOR);
 };
 
