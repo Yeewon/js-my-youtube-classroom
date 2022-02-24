@@ -25,14 +25,13 @@ export const videoInfoList = {
     const newVideoInfoList = this.value.map((videoInfo) => {
       const { id, type } = videoInfo;
       if (id.videoId === targetId) {
-        const newVideoInfo = {
+        return {
           ...videoInfo,
           type: {
             ...type,
             [option]: !type[option],
           },
         };
-        return newVideoInfo;
       } else {
         return videoInfo;
       }
