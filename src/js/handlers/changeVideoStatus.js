@@ -1,3 +1,4 @@
+import { BUTTON_LIST } from "../constants/classroom.js";
 import { DELETE_CONFIRM_NSG } from "../constants/message.js";
 import {
   DELETE_SUCCESS_MSG,
@@ -13,26 +14,26 @@ import { onSnackbar } from "./snackbarControl.js";
 
 export const changeVideoStatus = ({ target }) => {
   const option = target.id;
-  if (!["watched", "liked", "delete"].includes(option)) return;
-  changeStatus(target, option);
-  loadVideo(filter.get());
+  if (BUTTON_LIST.includes(option)) {
+    changeStatus(target);
+    loadVideo(filter.get());
+  }
 };
 
-const changeStatus = (target, option) => {
-  const { videoId } = target.closest(".js-video").dataset;
-
+const changeStatus = (target) => {
   const status = {
     watched: () => handleWatchedButton(target),
     liked: () => handleLikedButton(target),
     delete: () => {
       if (confirm(DELETE_CONFIRM_NSG)) {
+        const { videoId } = target.closest(".js-video").dataset;
         videoInfoList.remove(videoId);
         onSnackbar(DELETE_SUCCESS_MSG);
       }
     },
   };
 
-  return status[option]();
+  return status[target.id]();
 };
 
 const handleWatchedButton = (target) => {
