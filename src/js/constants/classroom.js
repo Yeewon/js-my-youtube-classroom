@@ -6,3 +6,4 @@ export const MAX_STORE_KEYWORD_COUNT = 3;
 export const MAX_SAVEABLE_VIDEO_COUNT = 100;
 
 export const PRIMARY_COLOR = "bg-cyan-100";
+export const BUTTON_LIST = ["watched", "liked", "delete"];
