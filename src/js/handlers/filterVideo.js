@@ -21,12 +21,13 @@ const filterButtonController = (option = "toWatch") => {
 };
 
 export const loadVideo = (option = "toWatch") => {
-  const filteredVideo = filterVideo(videoInfoList.get(), option);
+  const filteredVideo = filterVideo(option);
   if (!filteredVideo.length) renderEmptyVideo();
   else renderSavedVideo(filteredVideo);
 };
 
-const filterVideo = (videos, option) => {
+const filterVideo = (option) => {
+  const videos = videoInfoList.get();
   const filter = {
     toWatch: () => videos.filter(({ type }) => !type.isWatched),
     watched: () => videos.filter(({ type }) => type.isWatched),
