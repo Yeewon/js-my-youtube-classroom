@@ -21,6 +21,26 @@ export const videoInfoList = {
     $("#saved-video-count").innerText = this.size;
   },
 
+  setStatus(option, targetId) {
+    const newVideoInfoList = this.value.map((videoInfo) => {
+      const { id, type } = videoInfo;
+      if (id.videoId === targetId) {
+        const newVideoInfo = {
+          ...videoInfo,
+          type: {
+            ...type,
+            [option]: !type[option],
+          },
+        };
+        return newVideoInfo;
+      } else {
+        return videoInfo;
+      }
+    });
+
+    this.set(newVideoInfoList);
+  },
+
   add(newVideoInfo = {}) {
     const newVideoInfoList = [...this.value, newVideoInfo];
     this.set(newVideoInfoList);
@@ -38,3 +58,13 @@ export const videoInfoList = {
     return this.value.length;
   },
 };
+
+/*
+{
+    id: { videoId },
+    snippet: { title, channelId, channelTitle, publishTime },
+    type: {
+      isWatched: false,
+      isLiked: false,
+    },
+*/
