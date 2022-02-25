@@ -24,13 +24,7 @@ const changeStatus = (target) => {
   const status = {
     watched: () => handleStatusButton(target),
     liked: () => handleStatusButton(target),
-    delete: () => {
-      if (confirm(DELETE_CONFIRM_NSG)) {
-        const { videoId } = target.closest(".js-video").dataset;
-        videoInfoList.remove(videoId);
-        onSnackbar(DELETE_SUCCESS_MSG);
-      }
-    },
+    delete: () => handleDeleteButton(target),
   };
 
   return status[target.id]();
@@ -43,6 +37,14 @@ const handleStatusButton = (target) => {
   videoInfoList.setStatus(option[target.id], targetId);
 
   showStatusChangeMessage(target);
+};
+
+const handleDeleteButton = (target) => {
+  if (confirm(DELETE_CONFIRM_NSG)) {
+    const { videoId } = target.closest(".js-video").dataset;
+    videoInfoList.remove(videoId);
+    onSnackbar(DELETE_SUCCESS_MSG);
+  }
 };
 
 const showStatusChangeMessage = (target) => {
