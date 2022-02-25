@@ -1,4 +1,4 @@
-import { BUTTON_LIST } from "../constants/classroom.js";
+import { BUTTON_LIST, UN_SELECTED_ATTRIBUTE } from "../constants/classroom.js";
 import { DELETE_CONFIRM_NSG } from "../constants/message.js";
 import {
   DELETE_SUCCESS_MSG,
@@ -38,7 +38,7 @@ const changeStatus = (target) => {
 
 const handleStatusButton = (target) => {
   const targetId = target.closest("article").dataset.videoId;
-  target.classList.toggle("opacity-hover");
+  target.classList.toggle(UN_SELECTED_ATTRIBUTE);
   videoInfoList.setStatus(option[target.id], targetId);
   if (target.id === "watched") {
     onSnackbar(isSelected(target) ? WATCHED_SUCCESS_MSG : TO_WATCH_SUCCESS_MSG);
@@ -50,7 +50,7 @@ const handleStatusButton = (target) => {
 };
 
 const isSelected = (target) => {
-  return !target.classList.contains("opacity-hover");
+  return !target.classList.contains(UN_SELECTED_ATTRIBUTE);
 };
 
 const option = {
