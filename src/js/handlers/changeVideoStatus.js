@@ -22,8 +22,8 @@ export const changeVideoStatus = ({ target }) => {
 
 const changeStatus = (target) => {
   const status = {
-    watched: () => handleWatchedButton(target),
-    liked: () => handleLikedButton(target),
+    watched: () => handleStatusButton(target),
+    liked: () => handleStatusButton(target),
     delete: () => {
       if (confirm(DELETE_CONFIRM_NSG)) {
         const { videoId } = target.closest(".js-video").dataset;
@@ -36,21 +36,24 @@ const changeStatus = (target) => {
   return status[target.id]();
 };
 
-const handleWatchedButton = (target) => {
+const handleStatusButton = (target) => {
   const targetId = target.closest("article").dataset.videoId;
   target.classList.toggle("opacity-hover");
-  videoInfoList.setStatus("isWatched", targetId);
-  onSnackbar(isSelected(target) ? WATCHED_SUCCESS_MSG : TO_WATCH_SUCCESS_MSG);
-};
-
-const handleLikedButton = (target) => {
-  const targetId = target.closest("article").dataset.videoId;
-  target.classList.toggle("opacity-hover");
-  videoInfoList.setStatus("isLiked", targetId);
-
-  onSnackbar(isSelected(target) ? LIKED_SUCCESS_MSG : LIKE_CANCEL_SUCCESS_MSG);
+  videoInfoList.setStatus(option[target.id], targetId);
+  if (target.id === "watched") {
+    onSnackbar(isSelected(target) ? WATCHED_SUCCESS_MSG : TO_WATCH_SUCCESS_MSG);
+  } else {
+    onSnackbar(
+      isSelected(target) ? LIKED_SUCCESS_MSG : LIKE_CANCEL_SUCCESS_MSG
+    );
+  }
 };
 
 const isSelected = (target) => {
   return !target.classList.contains("opacity-hover");
+};
+
+const option = {
+  watched: "isWatched",
+  liked: "isLiked",
 };
