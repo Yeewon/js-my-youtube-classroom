@@ -37,16 +37,26 @@ const changeStatus = (target) => {
 };
 
 const handleStatusButton = (target) => {
-  const targetId = target.closest("article").dataset.videoId;
   target.classList.toggle(UN_SELECTED_ATTRIBUTE);
+
+  const targetId = target.closest("article").dataset.videoId;
   videoInfoList.setStatus(option[target.id], targetId);
-  if (target.id === "watched") {
-    onSnackbar(isSelected(target) ? WATCHED_SUCCESS_MSG : TO_WATCH_SUCCESS_MSG);
-  } else {
-    onSnackbar(
-      isSelected(target) ? LIKED_SUCCESS_MSG : LIKE_CANCEL_SUCCESS_MSG
-    );
-  }
+
+  showStatusChangeMessage(target);
+};
+
+const showStatusChangeMessage = (target) => {
+  isWatchedButton
+    ? onSnackbar(
+        isSelected(target) ? WATCHED_SUCCESS_MSG : TO_WATCH_SUCCESS_MSG
+      )
+    : onSnackbar(
+        isSelected(target) ? LIKED_SUCCESS_MSG : LIKE_CANCEL_SUCCESS_MSG
+      );
+};
+
+const isWatchedButton = () => {
+  return target.id === "watched";
 };
 
 const isSelected = (target) => {
