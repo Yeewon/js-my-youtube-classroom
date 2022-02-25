@@ -1,6 +1,3 @@
-import { $ } from "../utils/DOM.js";
-import { SAVED_VIDEO_LIST } from "../constants/localStorage.js";
-import { setLocalStorage } from "../utils/localStorage.js";
 import { MAX_SAVEABLE_VIDEO_COUNT } from "../constants/classroom.js";
 import { renderSaveButton, renderSaveCancelButton } from "../utils/render.js";
 import { loadVideo } from "./filterVideo.js";
