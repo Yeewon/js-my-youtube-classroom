@@ -1,19 +1,24 @@
-import {formatDate} from '../utils/date.js';
-import {hoverLikeButtonTemplate, hoverWatchButtonTemplate, likedButtonTemplate, watchedButtonTemplate} from './button.js';
+import { formatDate } from "../utils/date.js";
+import {
+  hoverLikeButtonTemplate,
+  hoverWatchButtonTemplate,
+  likedButtonTemplate,
+  watchedButtonTemplate,
+} from "./button.js";
 
 export const createSavedVideoListTemplate = (videoInfos) => {
-    return `${videoInfos
-        .map((videoInfo) => savedVideoListTemplate(videoInfo))
-        .reverse()
-        .join('')}`;
+  return `${videoInfos
+    .map((videoInfo) => savedVideoListTemplate(videoInfo))
+    .reverse()
+    .join("")}`;
 };
 
-export const savedVideoListTemplate = ({id, snippet, type}) => {
-    const date = formatDate(snippet.publishTime);
-    const isWatchedButton = watchedButton(type);
-    const isLikedButton = likedButton(type);
+export const savedVideoListTemplate = ({ id, snippet, type }) => {
+  const date = formatDate(snippet.publishTime);
+  const isWatchedButton = watchedButton(type);
+  const isLikedButton = likedButton(type);
 
-    return `<article class="clip js-video relative" data-video-id="${id.videoId}" data-title="${snippet.title} data-channel-id="${snippet.channelId}" data-channel-title="${snippet.channelTitle}" data-publish-time="${snippet.publishTime}">
+  return `<article class="clip js-video relative" data-video-id="${id.videoId}" data-title="${snippet.title} data-channel-id="${snippet.channelId}" data-channel-title="${snippet.channelTitle}" data-publish-time="${snippet.publishTime}">
                 <div class="preview-container">
                 <iframe class="js-preview" width="100%" height="118" src="https://www.youtube.com/embed/${id.videoId}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
                 </div>
@@ -37,11 +42,11 @@ export const savedVideoListTemplate = ({id, snippet, type}) => {
 };
 
 const watchedButton = (type) => {
-    if (type.isWatched) return watchedButtonTemplate();
-    else return hoverWatchButtonTemplate();
+  if (type.isWatched) return watchedButtonTemplate();
+  else return hoverWatchButtonTemplate();
 };
 
 const likedButton = (type) => {
-    if (type.isLiked) return likedButtonTemplate();
-    else return hoverLikeButtonTemplate();
+  if (type.isLiked) return likedButtonTemplate();
+  else return hoverLikeButtonTemplate();
 };

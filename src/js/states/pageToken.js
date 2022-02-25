@@ -1,11 +1,11 @@
 export const pageToken = {
-    value: '',
+  value: "",
 
-    get() {
-        return this.value;
-    },
+  get() {
+    return this.value;
+  },
 
-    set(newToken = '') {
-        this.value = newToken;
-    },
+  set(newToken = "") {
+    this.value = newToken;
+  },
 };

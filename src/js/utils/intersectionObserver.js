@@ -1,31 +1,33 @@
-import {moreVideoLoadController} from '../handlers/videoLoadControl.js';
-import {$} from './DOM.js';
+import { moreVideoLoadController } from "../handlers/videoLoadControl.js";
+import { $ } from "./DOM.js";
 
 export const intersectionObserver = {
-    value: {},
-    options: {
-        root: $('#modal-inner'),
-        rootMargin: '0px',
-        threshold: 0.85,
-    },
+  value: {},
+  options: {
+    root: $("#modal-inner"),
+    rootMargin: "0px",
+    threshold: 0.85,
+  },
 
-    init() {
-        this.set(new IntersectionObserver(moreVideoLoadController.bind(this), this.options));
-    },
+  init() {
+    this.set(
+      new IntersectionObserver(moreVideoLoadController.bind(this), this.options)
+    );
+  },
 
-    set(observer) {
-        this.value = observer;
-    },
+  set(observer) {
+    this.value = observer;
+  },
 
-    get() {
-        return this.value;
-    },
+  get() {
+    return this.value;
+  },
 
-    disconnect() {
-        this.value.disconnect();
-    },
+  disconnect() {
+    this.value.disconnect();
+  },
 
-    observe($target) {
-        this.value.observe($target);
-    },
+  observe($target) {
+    this.value.observe($target);
+  },
 };

@@ -1,11 +1,11 @@
-import {$} from '../utils/DOM.js';
+import { $ } from "../utils/DOM.js";
 
-const $modal = $('.modal');
+const $modal = $(".modal");
 
 export const onModalShow = () => {
-    $modal.classList.add('open');
+  $modal.classList.add("open");
 };
 
 export const onModalClose = () => {
-    $modal.classList.remove('open');
+  $modal.classList.remove("open");
 };

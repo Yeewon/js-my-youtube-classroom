@@ -1,16 +1,16 @@
-import {$} from '../utils/DOM.js';
-import {renderSnackbar} from '../utils/render.js';
+import { $ } from "../utils/DOM.js";
+import { renderSnackbar } from "../utils/render.js";
 
 export const onSnackbar = (message) => {
-    renderSnackbar(message);
-    snackbarController();
+  renderSnackbar(message);
+  snackbarController();
 };
 
 const snackbarController = () => {
-    const $snackbar = $('#snackbar');
+  const $snackbar = $("#snackbar");
 
-    $snackbar.classList.toggle('show');
-    setTimeout(() => {
-        $snackbar.classList.toggle('show');
-    }, 3000);
+  $snackbar.classList.toggle("show");
+  setTimeout(() => {
+    $snackbar.classList.toggle("show");
+  }, 3000);
 };
