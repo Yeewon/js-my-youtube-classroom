@@ -46,10 +46,7 @@ export const videoInfoList = {
   },
 
   remove(targetId) {
-    const oldVideoInfo = [...this.value];
-    const newVideoinfo = oldVideoInfo.filter(
-      ({ id }) => id.videoId != targetId
-    );
+    const newVideoinfo = this.value.filter(({ id }) => id.videoId != targetId);
     this.set(newVideoinfo);
   },
 
@@ -57,13 +54,3 @@ export const videoInfoList = {
     return this.value.length;
   },
 };
-
-/*
-{
-    id: { videoId },
-    snippet: { title, channelId, channelTitle, publishTime },
-    type: {
-      isWatched: false,
-      isLiked: false,
-    },
-*/
